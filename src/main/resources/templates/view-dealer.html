@@ -26,7 +26,7 @@
 				</tr>
 			</thread>
 			<tbody>
-				<tr th:each="car,interationStatus : {listCar}">
+				<tr th:each="car,interationStatus : *{listCar}">
 					<td th:text="${iterationStatus.count}"></td>
 					<td th:text="${car.brand}"></td>
 					<td th:text="${car.type}"></td>
