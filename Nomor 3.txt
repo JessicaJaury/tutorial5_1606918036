@@ -1,0 +1,3 @@
+3. Jelaskan perbedaan antara th:include dengan th:replace.
+   Dengan th:include, Thymeleaf akan mengikutkan konten dari fragment page lain ke host tag.
+   Dengan th:replace, Thymeleaf akan mengganti/substitute host tag dengan yang ada di fragment.
