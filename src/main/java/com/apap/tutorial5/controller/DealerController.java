@@ -43,10 +43,28 @@ public class DealerController {
 		return "add";
 	}
 	
-	@RequestMapping(value="/dealer/view",method=RequestMethod.GET)
-	private String viewDealer(@RequestParam(value="dealerId",required=true) Long dealerId, Model model) {
-		DealerModel dealerList = dealerService.getDealerDetailById(dealerId).get();
-		model.addAttribute("dealer", dealerList);
+//	@RequestMapping("/dealer/view/{dealerId}")	
+//	@RequestMapping(value="/dealer/view", method = RequestMethod.GET)
+//	private String viewDealer(String dealerId, Model model) {
+//		DealerModel getDealerModel = dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
+//		List<CarModel> archieve =getDealerModel.getListCar();
+//		Collections.sort(archieve, comparePrice);
+//		model.addAttribute("dealer", getDealerModel);
+//		model.addAttribute("car", archieve);
+//		return "view-dealer";
+//	}
+	
+	@RequestMapping(value = "/dealer/view", method = RequestMethod.GET)
+	private String viewDealer(@RequestParam(value = "dealerId") Long dealerId, Model model) {
+		DealerModel archieveDealer = dealerService.getDealerDetailById(dealerId).get();
+		/**
+		* Untuk mendapatkan list car terurut berdasarkan harga dengan Query
+		* Bisa jadi beberda dengan cara Anda
+		*/
+		List<CarModel> archieveListCar = carService.getListCarOrderByPriceAsc(dealerId);
+		archieveDealer.setListCar(archieveListCar);
+
+		model.addAttribute("dealer", archieveDealer);
 		return "view-dealer";
 	}
 	
@@ -66,25 +84,28 @@ public class DealerController {
 		return "not-found";
 	}
 	
-	@RequestMapping(value = "/dealer/viewAll", method = RequestMethod.GET)
-	private String viewAll (Model model) {
-		List<DealerModel> cars = dealerService.getAllDetailDealer();
-		model.addAttribute("dealer", cars);
+	@RequestMapping(value="/dealer/viewall", method = RequestMethod.GET)
+	private String viewDealer(Model model) {
+		List<DealerModel> getDealerModel = dealerService.getAllDealer();
+		model.addAttribute("dealer", getDealerModel);
 		return "viewAllDealers";
 	}
 	
-	public static Comparator<CarModel> comparePrice = new Comparator<CarModel>() {
-		public int compare(CarModel o1, CarModel o2) {
-			Long price1 = o1.getPrice();
-			Long price2 = o2.getPrice();
-			return price1.compareTo(price2);
-		}
-	};
+	//public static Comparator<CarModel> comparePrice = new Comparator<CarModel>() {
+		//public int compare(CarModel o1, CarModel o2) {
+			//Long price1 = o1.getPrice();
+			//Long price2 = o2.getPrice();
+			//return price1.compareTo(price2);
+		//}
+	//};
 	
-	@RequestMapping (value = "/dealer/delete/{dealerId}", method = RequestMethod.GET)
-	private String deleteDealer (@PathVariable(value = "dealerId") String dealerId, Model model) {
-		DealerModel dealer =  dealerService.getDealerDetailById(Long.parseLong(dealerId)).get();
-		dealerService.deleteDealer(dealer);
-		return "delete";
+	@RequestMapping(value="/dealer/delete/{id}", method=RequestMethod.GET)
+	private String deleteDealer(@PathVariable(value = "id") Long dealerId, Model model) {
+		if(dealerService.getDealerDetailById(dealerId).isPresent()) {
+			DealerModel getDealerModel = dealerService.getDealerDetailById(dealerId).get();
+			dealerService.deleteDealer(getDealerModel);
+			return "delete-dealer";
+			}
+		return "not-found";
 	}
 } 

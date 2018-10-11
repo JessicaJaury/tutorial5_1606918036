@@ -3,7 +3,7 @@
 
 <head>
 	<!-- <title th:text="'Dealer Updated: ' + ${dealer.id}"></title> -->
-	<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+	<title th:replace="fragments/fragment :: title('Dealer Updated')"></title>
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
@@ -14,13 +14,13 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<h2>Hello!!!!</h2>
 	
-	<h3>Update Dealer</h3>
+	<h3>Dealer Update</h3>
 	<form th:action="@{/dealer/update{id}(id=${dealer.id})}" th:object="${dealer}" method="POST">
 		Alamat: <br>
-		<input type="text" name="alamat" th:field="${dealer.alamat}"/>
+		<input type="text" name="alamat" th:value="${dealer.alamat}"/>
 		<br>
 		No. Telp: <br>
-		<input type="text" name="noTelp" th:field="${dealer.noTelp}"/>
+		<input type="text" name="noTelp" th:value="${dealer.noTelp}"/>
 		<br><br>
 		<button type="submit">Submit</button>
 	</form>

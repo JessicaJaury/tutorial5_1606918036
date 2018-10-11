@@ -3,7 +3,7 @@
 
 <head>
 	<!-- <title th:text="'Car Updated: ' + ${oldCar.id}"></title> -->
-	<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+	<title th:replace="fragments/fragment :: title('Car Updated')"></title>
 	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
 	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
 	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">

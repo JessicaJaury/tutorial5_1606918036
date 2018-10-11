@@ -2,9 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<head th:fragment="titleFragment">
-		<title th:text="${title}"></title>
-	</head>
+	<title th:fragment="title(title)" th:text="${title}"></title>
 	
 	<head th:fragment="css">
 		<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">

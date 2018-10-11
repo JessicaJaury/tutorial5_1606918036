@@ -1,6 +1,6 @@
 package com.apap.tutorial5.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -22,24 +22,33 @@ public class CarServiceImpl implements CarService {
 	}
 	
 	@Override
-	public void deleteCar(Long id) {
+	public void deleteById(Long id) {
 		carDb.deleteById(id);
-		
-	}
-
-	@Override
-	public void updateCar(Long carId, CarModel car) {
-		CarModel carUpdated = carDb.getOne(carId);
-		carUpdated.setBrand(car.getBrand());
-		carUpdated.setType(car.getType());
-		carUpdated.setPrice(car.getPrice());
-		carUpdated.setAmount(car.getAmount());
-		carDb.save(carUpdated);
 	}
 	
 	@Override
+	public void updateCar(Long id, CarModel newCar) {
+		
+		CarModel carUpdated = carDb.getOne(id);
+		carUpdated.setBrand(newCar.getBrand());
+		carUpdated.setType(newCar.getType());
+		carUpdated.setPrice(newCar.getPrice());
+		carUpdated.setAmount(newCar.getAmount());
+		carDb.save(carUpdated);
+	}
+	
 	public CarModel getCar(Long id) {
 		return carDb.findById(id).get();
+	}
+
+	@Override
+	public List<CarModel> getListCarOrderByPriceAsc(Long dealerId) {
+		return carDb.findByDealerIdOrderByPriceAsc(dealerId);
+	}
+
+	@Override
+	public void deleteCar(CarModel car) {
+		carDb.delete(car);
 	}
 
 }

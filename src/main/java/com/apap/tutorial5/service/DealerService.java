@@ -9,7 +9,7 @@ public interface DealerService {
 	Optional<DealerModel> getDealerDetailById(Long id);
 	
 	void addDealer(DealerModel dealer);
-	List<DealerModel> getAllDetailDealer();
+	List<DealerModel> getAllDealer();
 	void updateDealer(Long id, Optional<DealerModel> dealer);
 	void deleteDealer(DealerModel dealer);
 }

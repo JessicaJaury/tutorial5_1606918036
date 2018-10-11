@@ -2,10 +2,11 @@
 <html xmlns:th= "http://thymeleaf.org">
 
 <head>
-	<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+	<title th:replace="fragments/fragment :: title('Error')"></title>
 </head>
 
 <body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
 	<h2>Data Tidak Ditemukan</h2>
 </body>
 

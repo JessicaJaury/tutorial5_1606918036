@@ -30,11 +30,11 @@ public class CarModel implements Serializable {
 	
 	@NotNull
 	@Column(name="price",nullable=false)
-	private Long price;
+	private long price;
 	
 	@NotNull
 	@Column(name="amount",nullable=false)
-	private Integer amount;
+	private int amount;
 	
 	/*public CarModel(Long id, String brand, String type, Long price, Integer amount) {
 		this.id = id;
@@ -47,7 +47,7 @@ public class CarModel implements Serializable {
 	public void setId(Long id) {
 		this.id=id;
 	}
-	public Long getId() {
+	public long getId() {
 		return id;
 	}
 	public void setBrand(String brand) {
@@ -65,13 +65,13 @@ public class CarModel implements Serializable {
 	public void setPrice(Long price) {
 		this.price=price;
 	}
-	public Long getPrice() {
+	public long getPrice() {
 		return price;
 	}
 	public void setAmount(Integer amount) {
 		this.amount=amount;
 	}
-	public Integer getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 	
